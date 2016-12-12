@@ -1,5 +1,6 @@
 package com.javatest.addressbook.service;
 
+import com.javatest.addressbook.exceptions.IncorrectDataException;
 import com.javatest.addressbook.modell.Address;
 import com.javatest.addressbook.repository.AddressBookRepository;
 import org.junit.Before;
@@ -92,7 +93,7 @@ public class AddressBookServiceTest {
         long result = unit.getDaysBetweenPeopleBirthdays(ANY_NAME_1, ANY_NAME_2);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IncorrectDataException.class)
     public void shouldThrowErrorWhenGetDaysBetweenPeopleBirthdaysAndDataNotExists(){
         //given
         Address address2 = new Address();

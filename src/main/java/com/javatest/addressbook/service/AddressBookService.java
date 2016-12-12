@@ -1,5 +1,6 @@
 package com.javatest.addressbook.service;
 
+import com.javatest.addressbook.exceptions.IncorrectDataException;
 import com.javatest.addressbook.modell.Address;
 import com.javatest.addressbook.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class AddressBookService {
             long diff = abs(person1.getBirthDate().getTime() - person2.getBirthDate().getTime());
             return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
         }else{
-            throw new RuntimeException("Address book data is incorrect");
+            throw new IncorrectDataException("Address book data is incorrect");
         }
     }
 

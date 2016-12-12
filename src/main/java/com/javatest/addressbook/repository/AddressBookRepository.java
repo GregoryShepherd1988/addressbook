@@ -1,5 +1,6 @@
 package com.javatest.addressbook.repository;
 
+import com.javatest.addressbook.exceptions.DateParseException;
 import com.javatest.addressbook.modell.Address;
 import com.javatest.addressbook.tools.FileTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class AddressBookRepository {
         try {
             address.setBirthDate(format.parse(addressStrings.get(2)));
         } catch (ParseException e) {
-            address.setBirthDate(null);
+            throw new DateParseException(e);
         }
         return address;
     }

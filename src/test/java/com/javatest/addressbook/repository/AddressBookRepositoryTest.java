@@ -1,6 +1,7 @@
 package com.javatest.addressbook.repository;
 
 
+import com.javatest.addressbook.exceptions.DateParseException;
 import com.javatest.addressbook.modell.Address;
 import com.javatest.addressbook.tools.FileTool;
 import org.junit.Before;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,5 +80,16 @@ public class AddressBookRepositoryTest {
         assertThat(result.getName(), is("Test1"));
         assertThat(result.getBirthDate().toString(), is("Mon Jan 01 00:01:00 GMT 1990"));
         assertThat(result.isMale(), is(true));
+    }
+
+    @Test(expected = DateParseException.class)
+    public void shouldThrowExceptionWhenDataIsIncorrect(){
+        // given
+        List<String> fileString = new ArrayList<>();
+        fileString.add("Test1, Male, 01/0");
+        fileString.add("Test2, Female, 31/01/90");
+        when(fileToolMock.loadFileFromResources("AddressBook.txt")).thenReturn(fileString);
+        // when
+        unit.loadDataFromFile();
     }
 }
