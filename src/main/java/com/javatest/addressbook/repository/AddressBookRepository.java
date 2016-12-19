@@ -44,7 +44,7 @@ public class AddressBookRepository {
         address.setName(addressStrings.get(0));
         address.setMale( "Male".equals(addressStrings.get(1)));
 
-        DateFormat format = new SimpleDateFormat("dd/mm/yy", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH);
         try {
             address.setBirthDate(format.parse(addressStrings.get(2)));
         } catch (ParseException e) {
